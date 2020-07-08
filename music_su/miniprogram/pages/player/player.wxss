@@ -46,11 +46,15 @@
   background: url('https://s3.music.126.net/m/s/img/needle.png?702cf6d95f29e2e594f53a3caab50e12') no-repeat center/contain;
   transform: rotate(-15deg);
   transform-origin: 24rpx 10rpx;
+  transition: transform 0.5s ease;
 }
 /* 
   transform: rotate(-15deg); 旋转 -15度
   transform-origin: 24rpx 10rpx;  旋转原点
 */
+.play.play-disc::after {
+  transform: rotate(0deg);
+}
 
 .play-disc-image {
   width: 368rpx;
@@ -62,6 +66,28 @@
   margin-top: -184rpx;
   margin-left: -184rpx;
 }
+
+.play-disc-image-rotation {
+  animation: rotation 12s linear infinite;
+  -moz-animation: rotation 12s linear infinite;
+  -webkit-animation: rotation 12s linear infinite;
+  -o-animation: rotation 12s linear infinite;
+}
+
+.play-disc-image-rotation-paused {
+  animation-play-state: paused;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+
 
 .controll {
   position: absolute;
@@ -79,7 +105,7 @@
   font-size: 80rpx;
 }
 
-.icon-bofang {
+.icon-bofang, .icon-zanting {
   font-size: 120rpx;
   margin-left: 50rpx;
   margin-right: 50rpx;

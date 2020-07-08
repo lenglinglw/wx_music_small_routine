@@ -39,5 +39,7 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "requiredBackgroundModes": ["audio", "location"]
+
 }

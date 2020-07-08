@@ -3,14 +3,17 @@
 let musicList = Array
 // 正在播放的index
 let index = -1
-
+// 全局背景播放器
+const backgroundAudioManager = wx.getBackgroundAudioManager()
+// 是否在播放
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    picUrl: ""
+    picUrl: "",
+    isPlay: true
   },
 
   /**
@@ -24,12 +27,52 @@ Page({
 
   _loadMusicDetail() {
     let musicDetail = musicList[index]
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        $url: 'musicUrl',
+        musicid: musicDetail.id
+      }
+    }).then((res) => {
+      console.log(JSON.parse(res.result))
+      let result = JSON.parse(res.result)
+      backgroundAudioManager.src = result.data[0].url
+      backgroundAudioManager.title = musicDetail.name
+      backgroundAudioManager.coverImgUrl = musicDetail.al.picUrl
+      backgroundAudioManager.singer = musicDetail.al.name
+    })
     wx.setNavigationBarTitle({
       title: musicDetail.name,
     })
     console.log('musicDetail.al.picUrl: ' + musicDetail.al.picUrl)
     this.setData({
       picUrl: musicDetail.al.picUrl
+    })
+  },
+  playOrPause() {
+    if (this.data.isPlay) {
+      this._pause()
+    } else {
+      this._play()
+    }
+  },
+  _pause() {
+    backgroundAudioManager.pause()
+    backgroundAudioManager.onPause(() => {
+      console.log('暂停成功')
+      this.setData({
+        isPlay: false
+      })
+    })
+  },
+
+  _play() {
+    backgroundAudioManager.play()
+    backgroundAudioManager.onPlay(() =>{
+      console.log('开始播放')
+      this.setData({
+        isPlay: true
+      })
     })
   },
 

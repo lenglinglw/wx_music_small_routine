@@ -1,13 +1,13 @@
 <view class="play-background" style='background:url({{picUrl}}) no-repeat top/cover'></view>
 <view class="play-mask"></view>
 <view class="play-info">
-  <view class="play-disc">
-    <image class="play-disc-image" src="{{picUrl}}"></image>
+  <view class="play-disc {{isPlay ? 'play' : ''}}">
+    <image class="play-disc-image play-disc-image-rotation {{isPlay ? '' : 'play-disc-image-rotation-paused'}}" src="{{picUrl}}"></image>
   </view >
 </view>
 
 <view class="controll">
   <text class="iconfont icon-icon-1"></text>
-  <text class="iconfont icon-bofang"></text>
+  <text class="iconfont {{isPlay? 'icon-zanting' : 'icon-bofang'}}" bindtap="playOrPause"></text>
   <text class="iconfont icon-icon-"></text>
 </view>
