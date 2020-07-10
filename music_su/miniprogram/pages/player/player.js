@@ -26,7 +26,9 @@ Page({
   },
 
   _loadMusicDetail() {
+    this._pause()
     let musicDetail = musicList[index]
+    console.log('musicDetail: ' + musicDetail.id)
     wx.cloud.callFunction({
       name: 'music',
       data: {
@@ -76,6 +78,31 @@ Page({
     })
   },
 
+  previousClick() {
+    if (index == -1) {
+      return
+    } else {
+      if (index == 0) {
+        index = musicList.length - 1
+      } else {
+        index--
+      }
+      this._loadMusicDetail()
+    }
+  },
+
+  nextClick() {
+    if (index == -1) {
+      return
+    } else {
+      if (index == musicList.length - 1) {
+        index = 0
+      } else {
+        index++
+      }
+      this._loadMusicDetail()
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

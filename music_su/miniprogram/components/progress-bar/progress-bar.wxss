@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.controll {
+  position: relative;
+  flex: 1;
+}
+
+.movable-area {
+  width: 100%;
+  height: 34rpx;
+  position: absolute;
+  bottom: -14rpx;
+  left: 0;
+}
+
+.movable-view {
+  width: 36rpx;
+  height: 36rpx;
+  background: #fefefe;
+  border-radius: 50%;
+}
+
+.time {
+  width: 64rpx;
+  font-size: 24rpx;
+  padding: 20rpx;
+  font-family: NotoSansHans-Pegular;
+  font-weight: 400;
+  color: #fff;
+  line-height: 30rpx;
+}
