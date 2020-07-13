@@ -2,6 +2,10 @@ let movableAreaWidth = 0
 let movableViewWidth = 0
 
 let backgroundAudioManager = wx.getBackgroundAudioManager()
+// 是否在拖拽进度条
+let isChange = false
+// 音乐当前时间
+let _currentTime = -1
 Component({
   /**
    * 组件的属性列表
@@ -36,6 +40,7 @@ Component({
 
     onChange(event) {
       if (event.detail.source == 'touch') {
+        isChange = true
         console.log(event)
         this.data.progress = event.detail.x / (movableAreaWidth - movableViewWidth) * 100
         this.data.movableDis = event.detail.x
@@ -51,7 +56,8 @@ Component({
         progress: this.data.progress,
         movableDis: this.data.movableDis
       })
-      backgroundAudioManager.seek(this.data.progress * backgroundAudioManager.duration  / 100)
+      backgroundAudioManager.seek(this.data.progress * backgroundAudioManager.duration / 100)
+      isChange = false
     },
 
     _getMovableDis() {
@@ -68,7 +74,7 @@ Component({
 
     _audioManager() {
       backgroundAudioManager.onPlay(() => {
-
+        isChange = false
       })
 
       backgroundAudioManager.onCanplay(() => {
@@ -86,17 +92,30 @@ Component({
 
       backgroundAudioManager.onTimeUpdate(() => {
         // 播放进度,在前台可以
-        const currentTime = backgroundAudioManager.currentTime
-        const duration = backgroundAudioManager.duration
-        this._setCurrentTime()
-        this.setData({
-          movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
-          progress: currentTime / duration * 100
-        })
+        if (isChange == false) {
+          const currentTime = backgroundAudioManager.currentTime
+
+          if (parseInt(_currentTime) == parseInt(currentTime)) {
+            return
+          }
+          _currentTime = currentTime
+          const duration = backgroundAudioManager.duration
+          this._setCurrentTime()
+          this.setData({
+            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+            progress: currentTime / duration * 100
+          })
+          // 联动歌词
+          this.triggerEvent('timeUpdate', {
+            currentTime
+          })
+        }
       })
 
       backgroundAudioManager.onEnded(() => {
         // 播放完成
+        // 抛出事件给父元素
+        this.triggerEvent('musicEnd')
       })
     },
      

@@ -5,7 +5,6 @@ Component({
    */
   properties: {
     musicList: Array,
-    
   },
 
   /**

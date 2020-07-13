@@ -6,6 +6,7 @@ let index = -1
 // 全局背景播放器
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 // 是否在播放
+
 Page({
 
   /**
@@ -13,7 +14,9 @@ Page({
    */
   data: {
     picUrl: "",
-    isPlay: true
+    isPlay: true,
+    isLyricShow: false, // 歌词是否显示
+    lyric: "", // 歌词
   },
 
   /**
@@ -23,6 +26,7 @@ Page({
     musicList = wx.getStorageSync('musicList')
     index = options.index
     this._loadMusicDetail()
+
   },
 
   _loadMusicDetail() {
@@ -42,15 +46,39 @@ Page({
       backgroundAudioManager.title = musicDetail.name
       backgroundAudioManager.coverImgUrl = musicDetail.al.picUrl
       backgroundAudioManager.singer = musicDetail.al.name
+      this._play()
     })
     wx.setNavigationBarTitle({
       title: musicDetail.name,
     })
-    console.log('musicDetail.al.picUrl: ' + musicDetail.al.picUrl)
+
     this.setData({
-      picUrl: musicDetail.al.picUrl
+      picUrl: musicDetail.al.picUrl,
+      isPlay: true
+    })
+
+    // 获取歌词数据
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        $url: 'lyric',
+        musicid: musicDetail.id
+      }
+    }).then((res) => {
+      let lyric = '暂无歌词'
+      if (res.result != null) {
+        const lrc = JSON.parse(res.result).lrc
+        if (lrc != null) {
+          lyric = lrc.lyric
+        }
+      }
+      this.setData({
+        lyric: lyric
+      })
+
     })
   },
+
   playOrPause() {
     if (this.data.isPlay) {
       this._pause()
@@ -103,6 +131,18 @@ Page({
       this._loadMusicDetail()
     }
   },
+
+  onChangeLyricShow() {
+    console.log('点击了封面和歌词的切换:' + this.data.isLyricShow)
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
+  },
+
+  timeUpdate(event) {
+    this.selectComponent('.lyric').update(event.detail.currentTime)
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
