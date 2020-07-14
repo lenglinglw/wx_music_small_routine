@@ -7,6 +7,8 @@ let index = -1
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 // 是否在播放
 
+// 调用全局属性
+const app = getApp()
 Page({
 
   /**
@@ -26,13 +28,15 @@ Page({
     musicList = wx.getStorageSync('musicList')
     index = options.index
     this._loadMusicDetail()
-
   },
 
   _loadMusicDetail() {
-    this._pause()
+
+    // this._pause()
+    
     let musicDetail = musicList[index]
     console.log('musicDetail: ' + musicDetail.id)
+    app.setPlayingMusicId(musicDetail.id)
     wx.cloud.callFunction({
       name: 'music',
       data: {
