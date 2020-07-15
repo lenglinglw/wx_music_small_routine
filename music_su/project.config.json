@@ -72,6 +72,12 @@
 					"pathName": "pages/demo/demo",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发现",
+					"pathName": "pages/blog/blog",
+					"scene": null
 				}
 			]
 		}
