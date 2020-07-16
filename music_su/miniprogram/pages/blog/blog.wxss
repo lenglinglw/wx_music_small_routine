@@ -26,5 +26,11 @@
 
 .search-container {
   flex: 1;
-  background-color: teal;
+  /* background-color: teal; */
+}
+
+.x-bottom-modal-login-button {
+  width: 330rpx;
+  background-color: #d43c33;
+  color: white;
 }

@@ -6,6 +6,11 @@
   position: relative;
 }
 
+.search-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .search-bar {
   height: 68rpx;
   font-size: 28rpx;
@@ -13,11 +18,14 @@
   background-color: #f5f5f5;
   padding-left: 60rpx;
   flex: 1;
+  margin-left: 20rpx;
 }
-
+.search-bar-placeholder {
+  color: #999;
+}
 .search-button {
   background-color: #d43c44;
   color: #fff;
-  margin-left: 0rpx;
+  margin-left: 20rpx;
   font-size: 24rpx;
 }

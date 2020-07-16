@@ -1,0 +1,7 @@
+<view class="modal" hidden="{{!isModalShow}}">
+  <view class="panel">
+    <image src="../../images/delete.png" class="delete-image" bindtap="onClose"></image>
+    <!-- slot插槽 -->
+    <slot name="slot1"></slot>
+  </view>
+</view>
