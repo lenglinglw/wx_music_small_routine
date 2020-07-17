@@ -1,0 +1,4 @@
+
+<x-bottom-modal isModalShow="{{isModalShow}}">
+  <button slot="slot1" class="login-button" open-type="getUserInfo" bindgetuserinfo="onLogin">前往登录</button>
+  </x-bottom-modal>

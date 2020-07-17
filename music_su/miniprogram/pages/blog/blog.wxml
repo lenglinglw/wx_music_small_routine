@@ -8,8 +8,5 @@
     </view>
   </view>
   <!-- 底部弹出层 -->
-  <x-bottom-modal isModalShow="{{isModalShow}}">
-  <button slot="slot1" class="x-bottom-modal-login-button" open-type="getUserInfo" bindgetuserinfo="onLogin">前往登录</button>
-  </x-bottom-modal>
-  
+  <x-login isModalShow="{{isModalShow}}" bind:loginSuccess="loginSuccess"/>
 </view>

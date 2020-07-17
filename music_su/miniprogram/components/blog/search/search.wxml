@@ -1,5 +1,5 @@
 <view class="container"> 
-  <image src="../../images/blog_seach.png" class="search-image"></image>
+  <image src="../../../images/blog_seach.png" class="search-image"></image>
   <input class="search-bar" placeholder="{{searchPlaceholder}}" placeholder-class="search-bar-placeholder"></input>
   <button class="search-button">搜索</button>
 </view>

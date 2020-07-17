@@ -1,0 +1,11 @@
+<view class="container">
+  <textarea class="content" placeholder="分享新鲜事..."></textarea>
+  <view class="image-list">
+  <!-- 图片显示 -->
+
+  <!-- 图片选择 -->
+  <view class="image-wrap selectImage">
+  </view>
+  </view>
+
+</view>

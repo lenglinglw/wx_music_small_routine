@@ -5,7 +5,8 @@
     "pages/profile/profile",
     "pages/demo/demo",
     "pages/musiclist/musiclist",
-    "pages/player/player"
+    "pages/player/player",
+    "pages/blog/blog-edit"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
