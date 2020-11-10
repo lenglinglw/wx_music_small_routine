@@ -29,10 +29,7 @@ Component({
           isModalShow: false
         })
       } else {
-        wx.showModal({
-          title: '需要授权',
-          cancelColor: '',
-        })
+        this.triggerEvent('loginFail')
       }
     },
   }

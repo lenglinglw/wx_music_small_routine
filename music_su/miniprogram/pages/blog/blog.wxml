@@ -8,5 +8,5 @@
     </view>
   </view>
   <!-- 底部弹出层 -->
-  <x-login isModalShow="{{isModalShow}}" bind:loginSuccess="loginSuccess"/>
+  <x-login isModalShow="{{isModalShow}}" bind:loginSuccess="loginSuccess" bind:loginFail="loginFail" />
 </view>

@@ -47,11 +47,15 @@ Page({
   },
 
   loginSuccess(userInfo) {
-    console.log('11111111')
-    console.log(userInfo.detail)
     const detail = userInfo.detail
     wx.navigateTo({
       url: `blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
+    })
+  },
+  loginFail() {
+    wx.showModal({
+      title: '需要授权',
+      cancelColor: '',
     })
   },
   /**

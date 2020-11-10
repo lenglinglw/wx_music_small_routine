@@ -1,11 +1,14 @@
 // pages/blog/blog-edit.js
+const MAX_WORDS_NUM = 140
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    // 当前输入文字个数
+    wordsNum: 0,
+    footerBottom: 0,
   },
 
   /**
@@ -15,6 +18,33 @@ Page({
     console.log(options)
   },
 
+  onInput(event) {
+    console.log(event)
+    let wordsNum = event.detail.cursor
+    if (wordsNum >= MAX_WORDS_NUM) {
+      wordsNum = `最大字数为${MAX_WORDS_NUM}`
+    }
+    this.setData({
+      wordsNum
+    })
+  },
+  /**
+   * 获取焦点
+   */
+  onFocus(event) {
+    this.setData({
+      footerBottom: event.detail.height
+    })
+  },
+
+  /**
+   * 失去焦点
+   */
+  onBlur() {
+    this.setData({
+      footerBottom: 0
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
